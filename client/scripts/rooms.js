@@ -3,17 +3,17 @@
 // with and manipulate the data.
 
 var Rooms = {
-  selected: 'People striving at Hack Reactor',
+
   // TODO: Define how you want to store the list of rooms
-  _data: ['room1', 'dontgointhisroom'],
+  _data: ['People Striving At Hack Reactor', 'dontgointhisroom'],
 
   // {name : 'roomname', selected : true}, ...
   addRoom: function(roomNameString) {
     Rooms._data.push(roomNameString);
-    // set selected as added room
-    //call re-rendering of room list
-  }
 
+    // TODO
+    // set selected as added room
+  },
   // TODO: Define methods which allow you to add rooms, update the list,
   // mark a room as selected, etc.
 

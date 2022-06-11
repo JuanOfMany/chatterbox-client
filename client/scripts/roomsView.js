@@ -14,6 +14,7 @@ var RoomsView = {
     // when this view loads.
     RoomsView.$addRoomForm.css('display', 'none');
     RoomsView.render();
+    Rooms.selected = Rooms._data[0];
 
   },
 
@@ -47,17 +48,11 @@ var RoomsView = {
 
   handleChange: function(event) {
     // TODO: Handle a user selecting a different room.
-    // get the selected roomName
-
-    // if roomname is 'Add room' then invoke addRoomClick<<<< not needed anymore
-    // if (roomnametext === 'Add Room') { <<<< not needed anymore
-    //   addRoomClick(); <<<< not needed anymore
-    // } <<<< not needed anymore
-
-    // set selected property in Rooms to the selected roomName
+    // get/set selected property in Rooms to the selected roomName
+    Rooms.selected = RoomsView.$select.val();
     //this.innerText is the newly selected room
 
-    //
+    MessagesView.render();
 
   },
 
@@ -75,8 +70,10 @@ var RoomsView = {
     var text = $('#new-room').val();
     Rooms.addRoom(text);
     RoomsView.renderRoom(text);
-    //rerender room list
     RoomsView.$addRoomForm.css('display', 'none');
+
+    // TODO
+    // set the selected
   },
 
   //when create room form closed button is clicked

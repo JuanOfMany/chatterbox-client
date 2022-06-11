@@ -17,13 +17,20 @@ var FormView = {
     // TODO: Currently, this is all handleSubmit does.
     // Make this function actually send a message to the Parse API.
 
-    console.log(App.username);
     //extract arguments from message id on submit
-    var text = $('#message').val();
+    var message = {text: $('#message').val(), username: App.username, roomname: Rooms.selected };
     //var message = {text: blahblah, username: aqwghtehw, roomname: someroom}
     //successful callback function that invokes Messages.add with "this".data
 
-    console.log('click!');
+    //successCB can be a function that push message to _data,  rerenders the $chat
+    var successCB = function() {
+      Messages._data.push(message);
+      MessagesView.render();
+      console.log(Rooms.selected);
+    };
+
+    Parse.create(JSON.stringify(message), successCB);
+
   },
 
   setStatus: function(active) {

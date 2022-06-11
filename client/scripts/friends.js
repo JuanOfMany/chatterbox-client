@@ -11,9 +11,17 @@ var Friends = {
   // and check the friendship status of other users.
 
   //add : a function that adds a username to friends._data
+  add: function(friend) {
+    Friends._data.push(friend);
+  },
 
   //toggle: a function that you can add/remove friend from friends._data
+  remove: function(friend) {
+    Friends._data.splice(Friends._data.indexOf(friend), 1);
+  },
 
   //isMyFriend: check if user is in friends._data
-
+  isMyFriend: function(friend) {
+    return (Friends._data.includes(friend));
+  }
 };
