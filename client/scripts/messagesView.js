@@ -8,21 +8,24 @@ var MessagesView = {
   initialize: function() {
     // TODO: Perform any work which needs to be done
     // when this view loads.
-
     //invoke render
-    render();
+    MessagesView.render();
   },
 
-  render: function(messages) {
+  render: function() {
     //has a parameter of messages
     //clear feed somehow
-    $chats.empty();
+    MessagesView.$chats.empty();
     //we will iterate over that messages array
-    messages.forEach(function(message) {
+    Messages._data.forEach(function(message) {
     //foreach iteration call render message passing in iteratee
-      renderMessage(message);
+      MessagesView.renderMessage(message);
     });
     // TODO: Render _all_ the messages.
+
+    //add event listener to message
+    var $messages = $('.message');
+    $messages.on('click', this.handleClick);
   },
 
   renderMessage: function(message) {
@@ -34,15 +37,11 @@ var MessagesView = {
     //template is a string version of the html we want
     //within that template function
     //have a <div>, to be filled out
-    var appendableMessage = messageView.render(message);
+    var appendableMessage = MessageView.render(message);
     //\/\/\/\/\/\/\/ COME BACK TO THIS LATER \/\/\/\/\/
     //convert message to XSS safe version <<< look into this together
-
     //then append div as a child of $chats node
-    $chats.append(appendableMessage);
-    //add event listener to message
-    var $messages = $('.message');
-    $messages.on('click', this.handleClick);
+    MessagesView.$chats.append(appendableMessage);
   },
 
   handleClick: function(event) {

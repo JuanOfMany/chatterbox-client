@@ -3,8 +3,8 @@
 // Apply what you learn here to other interactive views if necessary.
 
 var FormView = {
-
-  $form: $('form'),
+  //this for only for submitting messages
+  $form: $('#send'),
 
   initialize: function() {
     FormView.$form.on('submit', FormView.handleSubmit);
@@ -17,9 +17,9 @@ var FormView = {
     // TODO: Currently, this is all handleSubmit does.
     // Make this function actually send a message to the Parse API.
 
-    //$(this).
-    //extract arguments from "this" on submit
-    console.log($('#message').val());
+    console.log(App.username);
+    //extract arguments from message id on submit
+    var text = $('#message').val();
     //var message = {text: blahblah, username: aqwghtehw, roomname: someroom}
     //successful callback function that invokes Messages.add with "this".data
 
