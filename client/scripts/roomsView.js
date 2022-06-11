@@ -3,13 +3,16 @@
 
 var RoomsView = {
 
-  $createButton: $('btn create'),
-  $cancelButton: $('btn cancel'),
+  $addButton: $('#btn-add-room'),
+  $createButton: $('.create'),
+  $cancelButton: $('.cancel'),
   $select: $('#rooms select'),
+  $addRoomForm: $('.form-container'),
 
   initialize: function() {
     // TODO: Perform any work which needs to be done
     // when this view loads.
+    RoomsView.$addRoomForm.css('display', 'none');
     RoomsView.render();
 
   },
@@ -23,24 +26,38 @@ var RoomsView = {
       // invoke renderRoom for each roomname
       RoomsView.renderRoom(room);
     });
-    //
-    RoomsView.$select.on(('change', RoomsView.handleChange));
-
+    // var $select = $('#rooms select');
+    // console.log($select.html());
+    RoomsView.$addButton.on('click', RoomsView.addRoomClick);
+    RoomsView.$select.on('change', RoomsView.handleChange);
+    RoomsView.$createButton.on('click', RoomsView.createRoomClick);
+    RoomsView.$cancelButton.on('click', RoomsView.closeFormClick);
   },
 
   renderRoom: function(roomname) {
     // TODO: Render out a single room.
     // create an option tag with the room name
-    var roomName = `<option value='${roomname}' > ${roomname} </option>`;
+    var roomName = `<option class="room" value='${roomname}' > ${roomname} </option>`;
     // append to <select> tag
     RoomsView.$select.append(roomName);
+    // var $room = $('.room');
+    // console.log($room);
+    // $room.on('click', function() { console.log('this might work?'); });
   },
 
   handleChange: function(event) {
-    console.log('this changed something');
     // TODO: Handle a user selecting a different room.
+    // get the selected roomName
+
+    // if roomname is 'Add room' then invoke addRoomClick<<<< not needed anymore
+    // if (roomnametext === 'Add Room') { <<<< not needed anymore
+    //   addRoomClick(); <<<< not needed anymore
+    // } <<<< not needed anymore
+
+    // set selected property in Rooms to the selected roomName
     //this.innerText is the newly selected room
 
+    //
 
   },
 
@@ -49,22 +66,24 @@ var RoomsView = {
     // TODO: Handle the user clicking the "Add Room" button.
     // get the form node, set its display property to "block"
     console.log('clicked');
-    $('#btn-add-room').style.display = 'block';
+    RoomsView.$addRoomForm.css('display', 'block');
   },
 
   //when Create Room button is pressed
   createRoomClick: function(event) {
     event.preventDefault();
     var text = $('#new-room').val();
-    console.log(text);
     Rooms.addRoom(text);
+    RoomsView.renderRoom(text);
     //rerender room list
+    RoomsView.$addRoomForm.css('display', 'none');
   },
 
   //when create room form closed button is clicked
   closeFormClick: function(event) {
     // get the form node, set its display property to "block"
-    $('#btn cancel').style.display = 'none';
+    // $('#cancel').style.display = 'none';
+    RoomsView.$addRoomForm.css('display', 'none');
   }
 
 };
